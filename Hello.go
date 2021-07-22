@@ -160,22 +160,34 @@ func main(){
 	checkErr(err)
 	defer db.Close()
 
-	// // Inserting into table
-	// id,name,age,address:=insertInput()
-	// insertTable(db,id,name,age,address)
+	fmt.Println("Type 1 for Insert\nType 2 for Update\nType 3 for Delete\nType 4 for Select One Row\nType 5 for Select Multiple Row")
 
-	// // Updating table values
-	// id,name,address:=updateInput()
-	// updateTable(db,id,name,address)
+	scanner:=bufio.NewScanner(os.Stdin)
 
-	// // Deleting table row
-	// deleteRowFromTable(db)
+	fmt.Printf("Enter : ")
+	scanner.Scan()
+	flag,_:=strconv.ParseInt(scanner.Text(),10,64)
 
-	// // Selecting Single Row
-	// selectSingleRowFromTable(db)
+	if flag == 1{
+		// Inserting into table
+		id,name,age,address:=insertInput()
+		insertTable(db,id,name,age,address)
+	}else if flag == 2{
+		// Updating table values
+		id,name,address:=updateInput()
+		updateTable(db,id,name,address)
+	}else if flag == 3{
+		// Deleting table row
+		deleteRowFromTable(db)
+	}else if flag == 4{
+		// Selecting Single Row
+		selectSingleRowFromTable(db)
+	}else if flag == 5{
+		// Select Multiple Row
+		selectMultiplerRowFromTable(db)
+	}else{
+		fmt.Println("You entered wrong value")
+	}
 
-	// Select Multiple Row
-	selectMultiplerRowFromTable(db)
-	
 }
 
